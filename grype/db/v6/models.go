@@ -470,6 +470,10 @@ type OperatingSystem struct {
 
 	// Codename is the codename of a specific release (e.g. "buster" for debian 10)
 	Codename string `gorm:"column:codename;index,collate:NOCASE"`
+
+	// Designator is a string used to distinguish between different releases of the same version of the operating system
+	// such as RHEL-9.4-EUS vs RHEL-9
+	Designator string `gorm:"column:designator;index,collate:NOCASE"`
 }
 
 func (o *OperatingSystem) VersionNumber() string {

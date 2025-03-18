@@ -101,6 +101,8 @@ type OSSpecifier struct {
 	// LabelVersion is a string that represents a floating version (e.g. "edge" or "unstable") or is the CODENAME field in /etc/os-release (e.g. "wheezy" for debian 7)
 	LabelVersion string
 
+	Designator string
+
 	// AllowMultiple specifies whether we intend to allow for multiple distro identities to be matched.
 	AllowMultiple bool
 }
@@ -594,6 +596,10 @@ func (s *affectedPackageStore) resolveDistro(d OSSpecifier) ([]OperatingSystem, 
 
 	if d.LabelVersion != "" {
 		query = query.Where("codename = ? collate nocase OR label_version = ? collate nocase", d.LabelVersion, d.LabelVersion)
+	}
+
+	if d.Designator != "" {
+		query = query.Where("designator = ? collate nocase", d.Designator)
 	}
 
 	return s.searchForDistroVersionVariants(query, d)

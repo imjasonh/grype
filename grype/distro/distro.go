@@ -14,6 +14,7 @@ type Distro struct {
 	Type       Type
 	Version    *hashiVer.Version
 	RawVersion string
+	Designator string
 	IDLike     []string
 }
 
@@ -35,6 +36,16 @@ func New(t Type, version string, idLikes ...string) (*Distro, error) {
 		RawVersion: version,
 		IDLike:     idLikes,
 	}, nil
+}
+
+func (d Distro) WithDesignator(designator string) *Distro {
+	return &Distro{
+		Type:       d.Type,
+		Designator: designator,
+		Version:    d.Version,
+		RawVersion: d.Designator,
+		IDLike:     d.IDLike,
+	}
 }
 
 // NewFromRelease creates a new Distro object derived from a syft linux.Release object.
