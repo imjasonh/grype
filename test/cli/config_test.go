@@ -147,6 +147,22 @@ func Test_configLoading(t *testing.T) {
 		},
 	}
 
+	tests = append(tests, struct {
+		name     string
+		home     string
+		cwd      string
+		args     []string
+		expected []ignore
+		err      string
+	}{
+		name: "euvd configuration",
+		home: configsDir,
+		cwd:  cwd,
+		args: []string{"--config", path("euvd-config.yaml")},
+		expected: []ignore{},
+		err: "",
+	})
+
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
 			require.NoError(t, os.Chdir(test.cwd))

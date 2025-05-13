@@ -335,6 +335,9 @@ external-sources:
     search-upstream-by-sha1: true
     base-url: https://search.maven.org/solrsearch/select
     rate-limit: 300ms # Time between Maven API requests
+  euvd:
+    enable: true # Enable EUVD as a vulnerability source
+    base-url: https://euvdservices.enisa.europa.eu/api
 ```
 
 You can also configure the base-url if you're using another registry as your maven endpoint.
@@ -848,6 +851,13 @@ external-sources:
 
     # (env: GRYPE_EXTERNAL_SOURCES_MAVEN_RATE_LIMIT)
     rate-limit: 300ms
+
+  euvd:
+    # enable EUVD as a vulnerability source (env: GRYPE_EXTERNAL_SOURCES_EUVD_ENABLE)
+    enable: true
+
+    # base URL of the EUVD repository to search (env: GRYPE_EXTERNAL_SOURCES_EUVD_BASE_URL)
+    base-url: 'https://euvdservices.enisa.europa.eu/api'
 
 match:
   java:
